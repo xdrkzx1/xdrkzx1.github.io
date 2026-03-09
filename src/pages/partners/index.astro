@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { partners } from '../../data/partners';
+
+const sapPartner = partners.find(p => p.type === 'SAP')!;
+const techPartners = partners.filter(p => p.type === 'Technology');
+const geoPartners = partners.filter(p => p.type === 'Geographic');
+const deliveryPartners = partners.filter(p => p.type === 'Delivery');
+
+const certifications = [
+  'SAP Certified in S/4HANA Finance',
+  'SAP Certified in SAP BRIM',
+  'SAP Certified in SAP BTP',
+  'SAP Certified in SAP PaPM',
+  'SAP Certified in SAP Analytics Cloud',
+  'SAP Certified in SAP FPSL',
+  'SAP Recognized Expertise — Insurance',
+  'SAP Recognized Expertise — Utilities',
+];
+---
+
+<BaseLayout
+  title="Partners & Certifications"
+  description="Noshtek is an SAP Gold Partner with recognised expertise in S/4HANA Finance, BRIM, FPSL, PaPM, and BTP — and a growing ecosystem of technology and delivery partners."
+>
+  <!-- Hero -->
+  <section class="partners-hero">
+    <div class="container partners-hero__inner">
+      <span class="badge badge--orange">Partners</span>
+      <h1 class="partners-hero__heading">Built on the Right Partnerships</h1>
+      <p class="partners-hero__sub">Our partnerships are carefully chosen — with SAP, cloud providers, and regional delivery specialists who amplify what we bring to client engagements.</p>
+    </div>
+  </section>
+
+  <!-- SAP Gold Partner -->
+  <section class="section sap-partner">
+    <div class="container">
+      <div class="sap-partner__inner reveal">
+        <div class="sap-partner__badge">
+          <svg class="sap-logo" viewBox="0 0 120 60" aria-label="SAP" fill="none">
+            <rect width="120" height="60" rx="8" fill="#0070F2"/>
+            <text x="60" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="white">SAP</text>
+          </svg>
+          <div class="sap-partner__tier">
+            <span class="gold-badge">Gold Partner</span>
+          </div>
+        </div>
+        <div class="sap-partner__text">
+          <h2 class="sap-partner__heading">SAP Gold Partner</h2>
+          <p class="sap-partner__desc">{sapPartner.description}</p>
+          <div class="sap-partner__certs">
+            {sapPartner.certifications?.map(c => (
+              <div class="cert-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                {c}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Certifications -->
+  <section class="section certs-section">
+    <div class="container">
+      <div class="section-label reveal">Certifications</div>
+      <h2 class="section-heading reveal">SAP Certified Expertise</h2>
+      <p class="section-sub reveal">Our consultants hold individual certifications across the SAP products we deliver. We invest continuously in keeping our certifications current.</p>
+      <div class="certs-grid">
+        {certifications.map((cert, i) => (
+          <div class={`cert-card reveal reveal-delay-${(i % 4) + 1}`}>
+            <div class="cert-card__check">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span class="cert-card__name">{cert}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Partners -->
+  <section class="section tech-partners">
+    <div class="container">
+      <div class="section-label reveal">Technology Partners</div>
+      <h2 class="section-heading reveal">Cloud & Technology Partners</h2>
+      <div class="partner-cards">
+        {techPartners.map((p, i) => (
+          <div class={`partner-card reveal reveal-delay-${i + 1}`}>
+            <h3 class="partner-card__name">{p.name}</h3>
+            <p class="partner-card__desc">{p.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Presence -->
+  <section class="section global-section">
+    <div class="container">
+      <div class="section-label reveal">Global Delivery</div>
+      <h2 class="section-heading reveal">Our Global Network</h2>
+      <p class="section-sub reveal">Noshtek operates across North America and Asia Pacific — providing consistent delivery quality across regions with local expertise where it matters.</p>
+      <div class="geo-grid">
+        {[...geoPartners, ...deliveryPartners].map((p, i) => (
+          <div class={`geo-card reveal reveal-delay-${i + 1}`}>
+            <div class="geo-card__icon">🌏</div>
+            <h3 class="geo-card__name">{p.name}</h3>
+            <p class="geo-card__desc">{p.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner reveal">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2 class="cta-banner__heading">Partner with a certified SAP Finance specialist</h2>
+        <p class="cta-banner__sub">Our SAP Gold Partner status means you get formally recognised expertise — not just experience.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="/contact" class="btn btn--white">Get in Touch</a>
+        <a href="/solutions" class="btn btn--outline-white">Our Solutions</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.partners-hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, #0a4a78 100%);
+  padding-block: var(--space-20) var(--space-16);
+  color: var(--color-white);
+}
+.partners-hero__inner { max-width: 680px; }
+.partners-hero__heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; color: var(--color-white); margin-block: var(--space-4) var(--space-5); }
+.partners-hero__sub { font-size: var(--text-lg); color: rgba(255,255,255,0.8); line-height: 1.65; }
+
+/* SAP Partner */
+.sap-partner { background: var(--color-surface); }
+.sap-partner__inner { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-10); display: grid; grid-template-columns: 240px 1fr; gap: var(--space-10); align-items: center; }
+.sap-partner__badge { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+.sap-logo { width: 160px; height: 80px; border-radius: var(--radius-lg); }
+.gold-badge { background: linear-gradient(135deg, #b8860b, #ffd700); color: #fff; padding: var(--space-2) var(--space-5); border-radius: 100px; font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.05em; }
+.sap-partner__heading { font-size: var(--text-2xl); font-weight: 800; color: var(--color-blue); margin-bottom: var(--space-3); }
+.sap-partner__desc { font-size: var(--text-base); color: var(--color-grey); line-height: 1.7; margin-bottom: var(--space-5); }
+.sap-partner__certs { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+.cert-item { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text); }
+.cert-item svg { color: var(--color-orange); flex-shrink: 0; }
+
+/* Certs grid */
+.certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-top: var(--space-10); }
+.cert-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5); display: flex; align-items: center; gap: var(--space-3); }
+.cert-card__check { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,142,1,0.1); color: var(--color-orange); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cert-card__name { font-size: var(--text-sm); font-weight: 600; color: var(--color-blue); line-height: 1.4; }
+
+/* Technology Partners */
+.partner-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); margin-top: var(--space-8); }
+.partner-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-7); }
+.partner-card__name { font-size: var(--text-xl); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-3); }
+.partner-card__desc { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+
+/* Global */
+.global-section { background: var(--color-surface); }
+.geo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); margin-top: var(--space-10); }
+.geo-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); }
+.geo-card__icon { font-size: 1.8rem; margin-bottom: var(--space-3); }
+.geo-card__name { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-2); }
+.geo-card__desc { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.65; }
+
+@media (max-width: 1000px) {
+  .sap-partner__inner { grid-template-columns: 1fr; }
+  .sap-partner__badge { flex-direction: row; justify-content: flex-start; }
+  .certs-grid { grid-template-columns: repeat(2, 1fr); }
+  .geo-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .partner-cards { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr; }
+  .geo-grid { grid-template-columns: 1fr; }
+}
+</style>

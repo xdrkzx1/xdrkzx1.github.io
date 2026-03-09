@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { industries } from '../../data/industries';
+import { solutions } from '../../data/solutions';
+---
+
+<BaseLayout
+  title="Industries We Serve"
+  description="Noshtek delivers AI + SAP finance solutions purpose-built for insurance, utilities, and telecom — regulated industries with unique financial complexity."
+>
+  <!-- Hero -->
+  <section class="ind-hero">
+    <div class="container ind-hero__inner">
+      <span class="badge badge--orange">Industries</span>
+      <h1 class="ind-hero__heading">Built for Regulated Industries</h1>
+      <p class="ind-hero__sub">Insurance, utilities, and telecom face financial complexity that generic SAP partners can't navigate. Our consultants live in your industry — and our solutions are designed for it.</p>
+    </div>
+  </section>
+
+  <!-- Industry Cards -->
+  <section class="section">
+    <div class="container">
+      <div class="ind-grid">
+        {industries.map((ind, i) => (
+          <article class={`ind-card reveal reveal-delay-${i + 1}`}>
+            <div class="ind-card__header" style={`background: ${ind.color};`}>
+              <span class="ind-card__icon">{ind.icon}</span>
+              <h2 class="ind-card__name">{ind.name}</h2>
+              <p class="ind-card__tagline">{ind.tagline}</p>
+            </div>
+            <div class="ind-card__body">
+              <div class="ind-card__stats">
+                {ind.stats.map(s => (
+                  <div class="ind-stat">
+                    <span class="ind-stat__value">{s.value}</span>
+                    <span class="ind-stat__label">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div class="ind-card__challenges">
+                <p class="ind-card__section-label">Key Challenges We Solve</p>
+                <ul>
+                  {ind.challenges.slice(0, 3).map(c => (
+                    <li>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                      {c.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href={`/industries/${ind.slug}`} class="btn btn--primary ind-card__cta">
+                Explore {ind.name} →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why regulated industries -->
+  <section class="section ind-why">
+    <div class="container">
+      <div class="section-label reveal">Our Specialisation</div>
+      <h2 class="section-heading reveal">Why Regulated Industries Are Different</h2>
+      <p class="section-sub reveal">We chose to specialise — not diversify. Here's why regulated industry SAP finance requires a different kind of partner.</p>
+      <div class="why-grid">
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-card__num">01</div>
+          <h3>Regulatory complexity</h3>
+          <p>IFRS 17, RIIO price controls, FCC regulations — these aren't footnotes. They're central to how your financials must be structured in SAP.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-card__num">02</div>
+          <h3>High-volume transaction processing</h3>
+          <p>Millions of meter reads, policy billing events, or call records — your billing infrastructure must handle scale that generic ERP implementations can't.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <div class="why-card__num">03</div>
+          <h3>Industry-specific SAP modules</h3>
+          <p>FI-CA, FS-CD, SAP FPSL, SAP BRIM — the modules that matter most to you aren't what most SAP consultants know best.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-4">
+          <div class="why-card__num">04</div>
+          <h3>Stakeholder expectations</h3>
+          <p>CFOs in regulated industries have different reporting obligations, audit requirements, and board expectations than their commercial counterparts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions cross-link -->
+  <section class="section ind-solutions">
+    <div class="container">
+      <div class="section-label reveal">Our Capabilities</div>
+      <h2 class="section-heading reveal">Solutions Across Every Industry</h2>
+      <div class="sol-links">
+        {solutions.map(sol => (
+          <a href={`/solutions/${sol.slug}`} class="sol-link reveal">
+            <span class="sol-link__icon">{sol.icon}</span>
+            <span class="sol-link__title">{sol.shortTitle}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner reveal">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2 class="cta-banner__heading">Speak to someone who knows your industry</h2>
+        <p class="cta-banner__sub">Our specialists have deep domain expertise in insurance, utilities, and telecom — not just SAP.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="/contact" class="btn btn--white">Schedule a Conversation</a>
+        <a href="/customer-stories" class="btn btn--outline-white">See Our Work</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.ind-hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, #0a4a78 100%);
+  padding-block: var(--space-20) var(--space-16);
+  color: var(--color-white);
+}
+.ind-hero__inner { max-width: 720px; }
+.ind-hero__heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-white);
+  margin-block: var(--space-4) var(--space-5);
+}
+.ind-hero__sub {
+  font-size: var(--text-lg);
+  color: rgba(255,255,255,0.8);
+}
+
+/* Industry Cards */
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.ind-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+.ind-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.ind-card__header {
+  padding: var(--space-8);
+  color: var(--color-white);
+}
+.ind-card__icon { font-size: 2.5rem; display: block; margin-bottom: var(--space-3); }
+.ind-card__name { font-size: var(--text-2xl); font-weight: 800; color: var(--color-white); margin-bottom: var(--space-2); }
+.ind-card__tagline { font-size: var(--text-sm); color: rgba(255,255,255,0.8); line-height: 1.6; }
+.ind-card__body { background: var(--color-white); padding: var(--space-6); flex: 1; display: flex; flex-direction: column; gap: var(--space-5); }
+
+.ind-card__stats { display: flex; gap: var(--space-4); }
+.ind-stat { display: flex; flex-direction: column; gap: 2px; }
+.ind-stat__value { font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: var(--color-blue); }
+.ind-stat__label { font-size: var(--text-xs); color: var(--color-grey); }
+
+.ind-card__section-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-grey); margin-bottom: var(--space-3); }
+.ind-card__challenges ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.ind-card__challenges li { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text); }
+.ind-card__challenges li svg { color: var(--color-orange); flex-shrink: 0; }
+.ind-card__cta { align-self: flex-start; margin-top: auto; }
+
+/* Why Section */
+.ind-why { background: var(--color-surface); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+.why-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.why-card__num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-3xl);
+  color: rgba(8,58,94,0.1);
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+.why-card h3 { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-2); }
+.why-card p { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+
+/* Solutions Links */
+.sol-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+.sol-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  text-decoration: none;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+.sol-link:hover { box-shadow: var(--shadow-md); border-color: var(--color-orange); }
+.sol-link__icon { font-size: 1.5rem; }
+.sol-link__title { flex: 1; font-size: var(--text-sm); font-weight: 600; color: var(--color-blue); }
+.sol-link svg { color: var(--color-grey); transition: color var(--transition-fast); }
+.sol-link:hover svg { color: var(--color-orange); }
+
+@media (max-width: 1000px) {
+  .ind-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
+  .sol-links { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .sol-links { grid-template-columns: 1fr; }
+}
+</style>

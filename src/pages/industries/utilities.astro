@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getIndustryBySlug, industries } from '../../data/industries';
+import { solutions } from '../../data/solutions';
+
+const ind = getIndustryBySlug('utilities')!;
+const relSolutions = solutions.filter(s => ind.solutions.includes(s.slug));
+const others = industries.filter(i => i.slug !== ind.slug);
+---
+
+<BaseLayout
+  title="SAP Finance for Utilities"
+  description={ind.description}
+>
+  <section class="ind-detail-hero" style={`background: linear-gradient(135deg, ${ind.color} 0%, #005530 100%);`}>
+    <div class="container ind-detail-hero__inner">
+      <div class="ind-detail-hero__text">
+        <a href="/industries" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          All Industries
+        </a>
+        <span class="ind-icon">{ind.icon}</span>
+        <h1 class="ind-detail-hero__heading">SAP Finance for {ind.name}</h1>
+        <p class="ind-detail-hero__desc">{ind.description}</p>
+        <div class="ind-detail-hero__ctas">
+          <a href="/contact" class="btn btn--orange">Speak to a Utilities Specialist</a>
+          <a href="/customer-stories" class="btn btn--outline-white">Client Stories</a>
+        </div>
+      </div>
+      <div class="ind-detail-hero__stats">
+        {ind.stats.map(s => (
+          <div class="stat-block">
+            <span class="stat-block__value">{s.value}</span>
+            <span class="stat-block__label">{s.label}</span>
+          </div>
+        ))}
+        <div class="stat-block">
+          <span class="stat-block__value">18+</span>
+          <span class="stat-block__label">Years SAP finance expertise</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reg-context">
+    <div class="container">
+      <div class="reg-context__inner reveal">
+        <div class="reg-context__label">Regulatory Environment</div>
+        <p class="reg-context__text">{ind.regulatoryContext}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-label reveal">What Keeps CFOs Up at Night</div>
+      <h2 class="section-heading reveal">Challenges We Solve for {ind.name}</h2>
+      <div class="challenges-grid">
+        {ind.challenges.map((c, i) => (
+          <div class={`challenge-card reveal reveal-delay-${i + 1}`}>
+            <h3 class="challenge-card__title">{c.title}</h3>
+            <p class="challenge-card__desc">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section ind-solutions">
+    <div class="container">
+      <div class="section-label reveal">Our Capabilities</div>
+      <h2 class="section-heading reveal">Solutions for {ind.name}</h2>
+      <div class="rel-solutions">
+        {relSolutions.map(sol => (
+          <a href={`/solutions/${sol.slug}`} class="rel-sol-card reveal">
+            <span class="rel-sol-card__icon">{sol.icon}</span>
+            <div class="rel-sol-card__body">
+              <h3 class="rel-sol-card__title">{sol.shortTitle}</h3>
+              <p class="rel-sol-card__tagline">{sol.tagline}</p>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section ind-others">
+    <div class="container">
+      <h2 class="section-heading reveal">Other Industries We Serve</h2>
+      <div class="other-inds">
+        {others.map(o => (
+          <a href={`/industries/${o.slug}`} class="other-ind reveal">
+            <span class="other-ind__icon">{o.icon}</span>
+            <div>
+              <h3 class="other-ind__name">{o.name}</h3>
+              <p class="other-ind__tagline">{o.tagline}</p>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner reveal">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2 class="cta-banner__heading">Ready to talk to a utilities SAP specialist?</h2>
+        <p class="cta-banner__sub">From smart metering BRIM to S/4HANA migrations — we've delivered it in your sector.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="/contact" class="btn btn--white">Schedule a Call</a>
+        <a href="/insights" class="btn btn--outline-white">Utilities Insights</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.ind-detail-hero { padding-block: var(--space-16); color: var(--color-white); }
+.ind-detail-hero__inner { display: grid; grid-template-columns: 1fr auto; gap: var(--space-12); align-items: start; }
+.back-link { display: inline-flex; align-items: center; gap: var(--space-1); color: rgba(255,255,255,0.7); text-decoration: none; font-size: var(--text-sm); margin-bottom: var(--space-5); transition: color var(--transition-fast); }
+.back-link:hover { color: var(--color-white); }
+.ind-icon { font-size: 3rem; display: block; margin-bottom: var(--space-4); }
+.ind-detail-hero__heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; color: var(--color-white); margin-bottom: var(--space-5); }
+.ind-detail-hero__desc { font-size: var(--text-lg); color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: var(--space-6); max-width: 580px; }
+.ind-detail-hero__ctas { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.ind-detail-hero__stats { display: flex; flex-direction: column; gap: var(--space-4); min-width: 200px; }
+.stat-block { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); padding: var(--space-5); }
+.stat-block__value { display: block; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-2xl); color: var(--color-orange); line-height: 1; margin-bottom: var(--space-1); }
+.stat-block__label { font-size: var(--text-sm); color: rgba(255,255,255,0.75); }
+.reg-context { background: var(--color-surface); }
+.reg-context__inner { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); border-left: 4px solid var(--color-orange); }
+.reg-context__label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-orange); margin-bottom: var(--space-2); }
+.reg-context__text { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+.challenges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); margin-top: var(--space-10); }
+.challenge-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); border-top: 3px solid var(--color-orange); }
+.challenge-card__title { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-3); }
+.challenge-card__desc { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+.ind-solutions { background: var(--color-surface); }
+.rel-solutions { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-8); }
+.rel-sol-card { display: flex; align-items: center; gap: var(--space-4); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); text-decoration: none; transition: box-shadow var(--transition-fast), border-color var(--transition-fast); }
+.rel-sol-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-orange); }
+.rel-sol-card__icon { font-size: 1.8rem; flex-shrink: 0; }
+.rel-sol-card__body { flex: 1; }
+.rel-sol-card__title { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-1); }
+.rel-sol-card__tagline { font-size: var(--text-sm); color: var(--color-grey); }
+.rel-sol-card > svg { color: var(--color-grey); transition: color var(--transition-fast); }
+.rel-sol-card:hover > svg { color: var(--color-orange); }
+.ind-others { background: var(--color-surface); }
+.other-inds { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-8); }
+.other-ind { display: flex; align-items: center; gap: var(--space-4); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); text-decoration: none; transition: box-shadow var(--transition-fast), border-color var(--transition-fast); }
+.other-ind:hover { box-shadow: var(--shadow-md); border-color: var(--color-orange); }
+.other-ind__icon { font-size: 1.8rem; flex-shrink: 0; }
+.other-ind > div { flex: 1; }
+.other-ind__name { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-1); }
+.other-ind__tagline { font-size: var(--text-sm); color: var(--color-grey); }
+.other-ind > svg { color: var(--color-grey); transition: color var(--transition-fast); }
+.other-ind:hover > svg { color: var(--color-orange); }
+@media (max-width: 900px) {
+  .ind-detail-hero__inner { grid-template-columns: 1fr; }
+  .ind-detail-hero__stats { flex-direction: row; flex-wrap: wrap; }
+  .stat-block { flex: 1; min-width: 140px; }
+  .challenges-grid { grid-template-columns: 1fr; }
+}
+</style>

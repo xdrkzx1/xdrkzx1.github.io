@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const values = [
+  { icon: '🎯', title: 'Specialisation over scale', desc: 'We deliberately stay focused on SAP finance for regulated industries. Depth beats breadth every time when the stakes are high.' },
+  { icon: '🤝', title: 'Senior-led delivery', desc: 'Our clients get the same people who sold the work. No bait-and-switch. No junior teams left to figure it out.' },
+  { icon: '💡', title: 'AI that works in practice', desc: 'We build AI that is explainable, auditable, and genuinely integrated with SAP — not pilot projects that never make it to production.' },
+  { icon: '📈', title: 'Outcomes, not activities', desc: 'We measure our success by your finance team\'s success — faster close, better profitability visibility, cleaner compliance.' },
+];
+
+const milestones = [
+  { year: '2006', event: 'Noshtek founded in Toronto, Ontario, focused exclusively on SAP finance consulting for regulated industries.' },
+  { year: '2009', event: 'Achieved SAP Gold Partner status and launched dedicated insurance practice.' },
+  { year: '2013', event: 'Launched BRIM practice; delivered first SAP BRIM implementation for a major North American utility.' },
+  { year: '2017', event: 'Expanded to New York with dedicated financial services and telecom practices.' },
+  { year: '2020', event: 'Launched AI Centre of Excellence; delivered first AI-powered reconciliation automation on SAP BTP.' },
+  { year: '2022', event: 'First IFRS 17 SAP FPSL implementation go-live in North America, one year ahead of regulatory deadline.' },
+  { year: '2024', event: 'Opened Singapore hub to support APAC growth; 200+ SAP projects delivered milestone.' },
+];
+---
+
+<BaseLayout
+  title="About Noshtek"
+  description="Noshtek is a boutique AI + SAP financial transformation partner for utilities, telecom, and insurance enterprises in North America."
+>
+  <!-- Hero -->
+  <section class="company-hero">
+    <div class="container company-hero__inner">
+      <span class="badge badge--orange">About Noshtek</span>
+      <h1 class="company-hero__heading">The AI + SAP Finance Partner Built for Regulated Industries</h1>
+      <p class="company-hero__sub">We're a boutique consultancy with a deliberate focus on what most SAP firms avoid — the financial complexity, regulatory burden, and high-stakes delivery requirements of utilities, telecom, and insurance.</p>
+      <div class="company-hero__stats">
+        <div class="hero-stat"><span class="hero-stat__val">50+</span><span class="hero-stat__label">Enterprise clients</span></div>
+        <div class="hero-stat"><span class="hero-stat__val">200+</span><span class="hero-stat__label">Projects delivered</span></div>
+        <div class="hero-stat"><span class="hero-stat__val">18+</span><span class="hero-stat__label">Years experience</span></div>
+        <div class="hero-stat"><span class="hero-stat__val">3</span><span class="hero-stat__label">Regulated verticals</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section company-story">
+    <div class="container">
+      <div class="story-inner reveal">
+        <div class="story-text">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-heading">Why We Chose to Specialise</h2>
+          <p>Noshtek was founded on a simple belief: the most valuable SAP consulting work isn't done by the biggest firms — it's done by specialists who genuinely understand the intersection of complex financial regulations and enterprise SAP architecture.</p>
+          <p>Insurance CFOs don't need a 500-person firm. They need consultants who have implemented IFRS 17 before, who understand the difference between GMM, PAA, and VFA measurement models, and who can sit with the actuarial team and make it work in SAP FPSL. That's what we do.</p>
+          <p>We built Noshtek to be the firm we wished existed when we were working inside these industries — senior-led, technically excellent, and genuinely invested in client outcomes rather than headcount utilisation.</p>
+        </div>
+        <div class="story-aside">
+          <div class="story-card">
+            <div class="story-card__icon">🏢</div>
+            <h3>Boutique, by design</h3>
+            <p>We maintain small, senior-weighted teams by design. Every client engagement is led by a Principal or Director — not handed to delivery staff.</p>
+          </div>
+          <div class="story-card">
+            <div class="story-card__icon">🤖</div>
+            <h3>AI-native since 2020</h3>
+            <p>We began embedding ML models into SAP finance workflows before "AI" became an industry buzzword. Our AI work is production-proven, not POC.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section company-values">
+    <div class="container">
+      <div class="section-label reveal">How We Work</div>
+      <h2 class="section-heading reveal">What Makes Us Different</h2>
+      <div class="values-grid">
+        {values.map((v, i) => (
+          <div class={`value-card reveal reveal-delay-${i + 1}`}>
+            <span class="value-card__icon">{v.icon}</span>
+            <h3 class="value-card__title">{v.title}</h3>
+            <p class="value-card__desc">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section company-timeline">
+    <div class="container">
+      <div class="section-label reveal">Our Journey</div>
+      <h2 class="section-heading reveal">18+ Years of SAP Finance</h2>
+      <div class="timeline">
+        {milestones.map((m, i) => (
+          <div class={`timeline-item reveal reveal-delay-${(i % 3) + 1}`}>
+            <div class="timeline-item__year">{m.year}</div>
+            <div class="timeline-item__line"></div>
+            <div class="timeline-item__event">{m.event}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Nav to sub-pages -->
+  <section class="section company-nav">
+    <div class="container">
+      <div class="comp-nav-grid">
+        <a href="/company/leadership" class="comp-nav-card reveal">
+          <span class="comp-nav-card__icon">👥</span>
+          <div>
+            <h3 class="comp-nav-card__title">Leadership & Experts</h3>
+            <p class="comp-nav-card__desc">Meet the senior team and domain experts who lead our practice areas.</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a href="/company/locations" class="comp-nav-card reveal">
+          <span class="comp-nav-card__icon">📍</span>
+          <div>
+            <h3 class="comp-nav-card__title">Our Locations</h3>
+            <p class="comp-nav-card__desc">Offices in Toronto, New York, Singapore, and beyond.</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a href="/partners" class="comp-nav-card reveal">
+          <span class="comp-nav-card__icon">🤝</span>
+          <div>
+            <h3 class="comp-nav-card__title">Partners</h3>
+            <p class="comp-nav-card__desc">SAP Gold Partner and our ecosystem of technology and delivery partners.</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a href="/careers" class="comp-nav-card reveal">
+          <span class="comp-nav-card__icon">🚀</span>
+          <div>
+            <h3 class="comp-nav-card__title">Careers</h3>
+            <p class="comp-nav-card__desc">Join a team of SAP finance specialists shaping the future of AI + finance.</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.company-hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, #0a4a78 100%);
+  padding-block: var(--space-20) var(--space-16);
+  color: var(--color-white);
+}
+.company-hero__inner { max-width: 800px; }
+.company-hero__heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; color: var(--color-white); margin-block: var(--space-4) var(--space-5); }
+.company-hero__sub { font-size: var(--text-lg); color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: var(--space-8); }
+.company-hero__stats { display: flex; gap: var(--space-10); flex-wrap: wrap; }
+.hero-stat__val { display: block; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-3xl); color: var(--color-orange); line-height: 1; }
+.hero-stat__label { font-size: var(--text-sm); color: rgba(255,255,255,0.7); }
+
+/* Story */
+.story-inner { display: grid; grid-template-columns: 1fr 360px; gap: var(--space-12); align-items: start; }
+.story-text p { color: var(--color-grey); line-height: 1.8; margin-top: var(--space-4); }
+.story-aside { display: flex; flex-direction: column; gap: var(--space-5); }
+.story-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); }
+.story-card__icon { font-size: 1.8rem; display: block; margin-bottom: var(--space-3); }
+.story-card h3 { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-2); }
+.story-card p { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+
+/* Values */
+.company-values { background: var(--color-surface); }
+.values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-top: var(--space-10); }
+.value-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); }
+.value-card__icon { font-size: 2rem; display: block; margin-bottom: var(--space-4); }
+.value-card__title { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-3); }
+.value-card__desc { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+
+/* Timeline */
+.company-timeline { background: var(--color-blue); }
+.company-timeline .section-label { color: var(--color-orange); }
+.company-timeline .section-heading { color: var(--color-white); }
+.timeline { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-10); }
+.timeline-item { display: grid; grid-template-columns: 80px 24px 1fr; gap: var(--space-4); align-items: start; padding-bottom: var(--space-6); }
+.timeline-item__year { font-family: var(--font-heading); font-weight: 800; font-size: var(--text-base); color: var(--color-orange); padding-top: 2px; text-align: right; }
+.timeline-item__line { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.timeline-item__line::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--color-orange); flex-shrink: 0; margin-top: 4px; }
+.timeline-item__line::after { content: ''; width: 2px; flex: 1; background: rgba(255,255,255,0.15); margin-top: 4px; }
+.timeline-item:last-child .timeline-item__line::after { display: none; }
+.timeline-item__event { font-size: var(--text-sm); color: rgba(255,255,255,0.8); line-height: 1.65; padding-top: 2px; }
+
+/* Nav */
+.comp-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+.comp-nav-card { display: flex; align-items: center; gap: var(--space-4); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); text-decoration: none; transition: box-shadow var(--transition-fast), border-color var(--transition-fast); }
+.comp-nav-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-orange); }
+.comp-nav-card__icon { font-size: 2rem; flex-shrink: 0; }
+.comp-nav-card > div { flex: 1; }
+.comp-nav-card__title { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-1); }
+.comp-nav-card__desc { font-size: var(--text-sm); color: var(--color-grey); }
+.comp-nav-card > svg { color: var(--color-grey); transition: color var(--transition-fast); }
+.comp-nav-card:hover > svg { color: var(--color-orange); }
+
+@media (max-width: 1000px) {
+  .story-inner { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .comp-nav-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+}
+</style>

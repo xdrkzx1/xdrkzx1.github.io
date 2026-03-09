@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { solutions } from '../../data/solutions';
+---
+
+<BaseLayout
+  title="SAP Finance Solutions"
+  description="Noshtek delivers AI-powered SAP finance solutions for utilities, telecom, and insurance — from S/4HANA migrations to BRIM, PaPM, and embedded AI."
+>
+  <!-- Hero -->
+  <section class="sol-hero">
+    <div class="container sol-hero__inner">
+      <div class="sol-hero__text">
+        <span class="badge badge--orange">Our Solutions</span>
+        <h1 class="sol-hero__heading">Specialized SAP Finance<br/>Capabilities for Regulated Industries</h1>
+        <p class="sol-hero__sub">Four interconnected practice areas — delivered together or independently — designed for the unique financial complexity of utilities, telecom, and insurance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="sol-grid">
+        {solutions.map((sol, i) => (
+          <article class={`sol-card reveal reveal-delay-${i + 1}`}>
+            <div class="sol-card__icon">{sol.icon}</div>
+            <h2 class="sol-card__title">{sol.title}</h2>
+            <p class="sol-card__tagline">{sol.tagline}</p>
+            <ul class="sol-card__caps">
+              {sol.capabilities.slice(0, 4).map(cap => (
+                <li>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  {cap.title}
+                </li>
+              ))}
+            </ul>
+            <div class="sol-card__outcomes">
+              {sol.outcomes.map(o => (
+                <div class="sol-card__stat">
+                  <span class="sol-card__stat-value">{o.value}</span>
+                  <span class="sol-card__stat-label">{o.label}</span>
+                </div>
+              ))}
+            </div>
+            <a href={`/solutions/${sol.slug}`} class="btn btn--primary sol-card__cta">
+              Explore {sol.shortTitle}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it comes together -->
+  <section class="section sol-together">
+    <div class="container">
+      <div class="section-label reveal">Why Noshtek</div>
+      <h2 class="section-heading reveal">Practices Built to Work Together</h2>
+      <p class="section-sub reveal">Our four practice areas are designed to be modular but integrated — delivering compounding value when combined across your SAP landscape.</p>
+
+      <div class="together-grid reveal">
+        <div class="together-item">
+          <div class="together-num">01</div>
+          <h3>Start with the financial core</h3>
+          <p>S/4HANA Finance and Central Finance provide the clean data foundation everything else depends on.</p>
+        </div>
+        <div class="together-arrow" aria-hidden="true">→</div>
+        <div class="together-item">
+          <div class="together-num">02</div>
+          <h3>Unlock revenue and billing</h3>
+          <p>BRIM and FI-CA transform how you bill, collect, and recognise revenue from complex products.</p>
+        </div>
+        <div class="together-arrow" aria-hidden="true">→</div>
+        <div class="together-item">
+          <div class="together-num">03</div>
+          <h3>Surface true profitability</h3>
+          <p>PaPM and SAC connect the dots — revealing which products, customers, and channels truly create value.</p>
+        </div>
+        <div class="together-arrow" aria-hidden="true">→</div>
+        <div class="together-item">
+          <div class="together-num">04</div>
+          <h3>Embed AI at every layer</h3>
+          <p>AI accelerators run within each practice — making your SAP investment continuously smarter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner reveal">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2 class="cta-banner__heading">Not sure where to start?</h2>
+        <p class="cta-banner__sub">Our specialists will map the right solution path to your business priorities — no commitment required.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="/contact" class="btn btn--white">Request a Discovery Call</a>
+        <a href="/insights" class="btn btn--outline-white">Browse Our Insights</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* Hero */
+.sol-hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, #0a4a78 100%);
+  padding-block: var(--space-20) var(--space-16);
+  color: var(--color-white);
+}
+.sol-hero__inner {
+  max-width: 760px;
+}
+.sol-hero__heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-block: var(--space-4) var(--space-5);
+  color: var(--color-white);
+}
+.sol-hero__sub {
+  font-size: var(--text-lg);
+  color: rgba(255,255,255,0.8);
+  max-width: 600px;
+}
+
+/* Grid */
+.sol-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
+.sol-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+.sol-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.sol-card__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+.sol-card__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-blue);
+}
+.sol-card__tagline {
+  font-size: var(--text-base);
+  color: var(--color-grey);
+  line-height: 1.65;
+}
+.sol-card__caps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+.sol-card__caps li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+.sol-card__caps li svg {
+  color: var(--color-orange);
+  flex-shrink: 0;
+}
+.sol-card__outcomes {
+  display: flex;
+  gap: var(--space-6);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.sol-card__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sol-card__stat-value {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  color: var(--color-orange);
+  line-height: 1;
+}
+.sol-card__stat-label {
+  font-size: var(--text-xs);
+  color: var(--color-grey);
+  line-height: 1.3;
+}
+.sol-card__cta {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Together */
+.sol-together {
+  background: var(--color-surface);
+}
+.together-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+}
+.together-item {
+  flex: 1;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.together-num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-3xl);
+  color: rgba(8,58,94,0.12);
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+.together-item h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-blue);
+  margin-bottom: var(--space-2);
+}
+.together-item p {
+  font-size: var(--text-sm);
+  color: var(--color-grey);
+  line-height: 1.65;
+}
+.together-arrow {
+  font-size: 1.5rem;
+  color: var(--color-orange);
+  margin-top: var(--space-8);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1000px) {
+  .together-grid { flex-direction: column; }
+  .together-arrow { transform: rotate(90deg); margin-block: 0; align-self: center; }
+}
+@media (max-width: 768px) {
+  .sol-grid { grid-template-columns: 1fr; }
+}
+</style>

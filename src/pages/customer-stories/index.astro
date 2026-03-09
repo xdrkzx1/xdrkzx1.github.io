@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { caseStudies } from '../../data/caseStudies';
+import { industries } from '../../data/industries';
+
+const allIndustries = [...new Set(caseStudies.map(c => c.industry))];
+---
+
+<BaseLayout
+  title="Customer Stories"
+  description="See how Noshtek delivers AI + SAP finance transformations for insurance, utilities, and telecom clients across North America."
+>
+  <!-- Hero -->
+  <section class="cs-hero">
+    <div class="container cs-hero__inner">
+      <span class="badge badge--orange">Client Success</span>
+      <h1 class="cs-hero__heading">Real Transformations.<br/>Measurable Results.</h1>
+      <p class="cs-hero__sub">From IFRS 17 go-lives to BRIM modernisations and AI-powered close acceleration — see how our clients transform their finance operations with Noshtek.</p>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="cs-stats">
+    <div class="container cs-stats__inner">
+      <div class="cs-stat">
+        <span class="cs-stat__value">50+</span>
+        <span class="cs-stat__label">Enterprise clients</span>
+      </div>
+      <div class="cs-stat">
+        <span class="cs-stat__value">200+</span>
+        <span class="cs-stat__label">SAP projects delivered</span>
+      </div>
+      <div class="cs-stat">
+        <span class="cs-stat__value">18+</span>
+        <span class="cs-stat__label">Years of experience</span>
+      </div>
+      <div class="cs-stat">
+        <span class="cs-stat__value">3</span>
+        <span class="cs-stat__label">Regulated verticals</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories Grid -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Filter -->
+      <div class="cs-filters reveal" role="group" aria-label="Filter by industry">
+        <button class="filter-btn is-active" data-filter="all">All</button>
+        {allIndustries.map(ind => (
+          <button class="filter-btn" data-filter={ind}>{ind}</button>
+        ))}
+      </div>
+
+      <div class="cs-grid" id="cs-grid">
+        {caseStudies.map((cs, i) => (
+          <article class={`cs-card reveal reveal-delay-${(i % 3) + 1}`} data-industry={cs.industry}>
+            <div class="cs-card__header">
+              <div class="cs-card__meta">
+                <span class="cs-card__industry">{cs.industry}</span>
+                <span class="cs-card__region">{cs.region}</span>
+              </div>
+              <div class="cs-card__products">
+                {cs.sapProducts.slice(0,2).map(p => <span class="product-tag">{p}</span>)}
+              </div>
+            </div>
+            <h2 class="cs-card__client">{cs.client}</h2>
+            <p class="cs-card__desc">{cs.clientDesc}</p>
+            <p class="cs-card__challenge">{cs.challenge}</p>
+            <div class="cs-card__outcomes">
+              {cs.outcomes.slice(0,3).map(o => (
+                <div class="cs-outcome">
+                  <span class="cs-outcome__value">{o.value}</span>
+                  <span class="cs-outcome__metric">{o.metric}</span>
+                </div>
+              ))}
+            </div>
+            {cs.testimonial && (
+              <blockquote class="cs-card__quote">
+                <p>"{cs.testimonial.quote.slice(0,140)}..."</p>
+                <footer>— {cs.testimonial.role}</footer>
+              </blockquote>
+            )}
+            <a href={`/customer-stories/${cs.slug}`} class="btn btn--secondary cs-card__cta">
+              Read Full Story →
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner reveal">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2 class="cta-banner__heading">Ready to be our next success story?</h2>
+        <p class="cta-banner__sub">Talk to a specialist about what's possible for your organisation.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="/contact" class="btn btn--white">Request a Consultation</a>
+        <a href="/solutions" class="btn btn--outline-white">Explore Our Solutions</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.cs-card');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.industry === f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+.cs-hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, #0a4a78 100%);
+  padding-block: var(--space-20) var(--space-16);
+  color: var(--color-white);
+}
+.cs-hero__inner { max-width: 680px; }
+.cs-hero__heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; color: var(--color-white); margin-block: var(--space-4) var(--space-5); }
+.cs-hero__sub { font-size: var(--text-lg); color: rgba(255,255,255,0.8); line-height: 1.65; }
+
+/* Stats */
+.cs-stats { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.cs-stats__inner { display: flex; justify-content: center; gap: var(--space-16); padding-block: var(--space-8); flex-wrap: wrap; }
+.cs-stat { text-align: center; }
+.cs-stat__value { display: block; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-3xl); color: var(--color-blue); line-height: 1; }
+.cs-stat__label { font-size: var(--text-sm); color: var(--color-grey); }
+
+/* Filters */
+.cs-filters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-8); }
+.filter-btn { padding: var(--space-2) var(--space-4); border: 1px solid var(--color-border); border-radius: 100px; background: var(--color-white); font-size: var(--text-sm); font-weight: 500; color: var(--color-grey); cursor: pointer; transition: all var(--transition-fast); }
+.filter-btn:hover { border-color: var(--color-orange); color: var(--color-orange); }
+.filter-btn.is-active { background: var(--color-orange); border-color: var(--color-orange); color: var(--color-white); font-weight: 600; }
+
+/* Grid */
+.cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
+.cs-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); transition: box-shadow var(--transition-normal), transform var(--transition-normal); }
+.cs-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.cs-card__header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-2); }
+.cs-card__meta { display: flex; flex-direction: column; gap: 2px; }
+.cs-card__industry { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-orange); }
+.cs-card__region { font-size: var(--text-xs); color: var(--color-grey); }
+.cs-card__products { display: flex; gap: var(--space-1); flex-wrap: wrap; }
+.product-tag { font-size: 11px; background: rgba(8,58,94,0.07); color: var(--color-blue); border-radius: 4px; padding: 2px 8px; font-weight: 600; }
+.cs-card__client { font-size: var(--text-xl); font-weight: 800; color: var(--color-blue); }
+.cs-card__desc { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.6; }
+.cs-card__challenge { font-size: var(--text-sm); color: var(--color-text); line-height: 1.65; }
+.cs-card__outcomes { display: flex; gap: var(--space-5); padding-block: var(--space-4); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); flex-wrap: wrap; }
+.cs-outcome { display: flex; flex-direction: column; gap: 2px; }
+.cs-outcome__value { font-family: var(--font-heading); font-weight: 800; font-size: var(--text-xl); color: var(--color-orange); line-height: 1; }
+.cs-outcome__metric { font-size: var(--text-xs); color: var(--color-grey); }
+.cs-card__quote { border-left: 3px solid var(--color-orange); margin: 0; padding-left: var(--space-4); }
+.cs-card__quote p { font-size: var(--text-sm); color: var(--color-grey); font-style: italic; line-height: 1.65; margin-bottom: var(--space-2); }
+.cs-card__quote footer { font-size: var(--text-xs); color: var(--color-grey); font-weight: 600; }
+.cs-card__cta { align-self: flex-start; margin-top: auto; }
+
+@media (max-width: 900px) { .cs-grid { grid-template-columns: 1fr; } }
+</style>

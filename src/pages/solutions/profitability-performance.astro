@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSolutionBySlug, solutions } from '../../data/solutions';
+
+const sol = getSolutionBySlug('profitability-performance')!;
+const others = solutions.filter(s => s.slug !== sol.slug);
+---
+
+<BaseLayout title={sol.title} description={sol.description}>
+  <section class="sol-detail-hero">
+    <div class="container sol-detail-hero__inner">
+      <div class="sol-detail-hero__text">
+        <a href="/solutions" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          All Solutions
+        </a>
+        <div class="sol-detail-hero__icon">{sol.icon}</div>
+        <h1 class="sol-detail-hero__heading">{sol.title}</h1>
+        <p class="sol-detail-hero__desc">{sol.description}</p>
+        <div class="sol-detail-hero__tags">
+          {sol.industries.map(ind => <span class="badge badge--white-ghost">{ind}</span>)}
+        </div>
+        <div class="sol-detail-hero__ctas">
+          <a href="/contact" class="btn btn--orange">Talk to a Specialist</a>
+          <a href="/insights" class="btn btn--outline-white">Related Insights</a>
+        </div>
+      </div>
+      <div class="sol-detail-hero__stats">
+        {sol.outcomes.map(o => (
+          <div class="outcome-card">
+            <span class="outcome-card__value">{o.value}</span>
+            <span class="outcome-card__label">{o.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-label reveal">What We Deliver</div>
+      <h2 class="section-heading reveal">Core Capabilities</h2>
+      <div class="caps-grid">
+        {sol.capabilities.map((cap, i) => (
+          <div class={`cap-card reveal reveal-delay-${(i % 3) + 1}`}>
+            <h3 class="cap-card__title">{cap.title}</h3>
+            <p class="cap-card__desc">{cap.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section sol-sap-section">
+    <div class="container">
+      <div class="sol-sap-inner">
+        <div class="sol-sap-text reveal">
+          <div class="section-label">Technology</div>
+          <h2 class="section-heading">SAP Products We Work With</h2>
+          <p>PaPM, SAC, and BW/4HANA expertise that turns your data into management decisions.</p>
+        </div>
+        <div class="sol-sap-badges reveal">
+          {sol.sapProducts.map(p => (
+            <div class="sap-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              {p}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sol-accel-section">
+    <div class="container">
+      <div class="section-label reveal">AI-Powered</div>
+      <h2 class="section-heading reveal">Our AI Accelerators</h2>
+      <p class="section-sub reveal">Proprietary tools that accelerate model build and surface insights faster.</p>
+      <div class="accel-grid">
+        {sol.accelerators.map((acc, i) => (
+          <div class={`accel-card reveal reveal-delay-${i + 1}`}>
+            <div class="accel-card__dot"></div>
+            <h3 class="accel-card__name">{acc.name}</h3>
+            <p class="accel-card__desc">{acc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section sol-others">
+    <div class="container">
+      <h2 class="section-heading reveal">Explore Our Other Solutions</h2>
+      <div class="others-grid">
+        {others.map(s => (
+          <a href={`/solutions/${s.slug}`} class="other-card reveal">
+            <span class="other-card__icon">{s.icon}</span>
+            <div>
+              <h3 class="other-card__title">{s.shortTitle}</h3>
+              <p class="other-card__tagline">{s.tagline}</p>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner reveal">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2 class="cta-banner__heading">Ready to see your true profitability?</h2>
+        <p class="cta-banner__sub">A PaPM specialist will show you what's possible in your SAP environment.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="/contact" class="btn btn--white">Request a Consultation</a>
+        <a href="/customer-stories" class="btn btn--outline-white">See Client Stories</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.sol-detail-hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, #0d5a8e 100%);
+  padding-block: var(--space-16);
+  color: var(--color-white);
+}
+.sol-detail-hero__inner { display: grid; grid-template-columns: 1fr 380px; gap: var(--space-12); align-items: center; }
+.back-link { display: inline-flex; align-items: center; gap: var(--space-1); color: rgba(255,255,255,0.7); text-decoration: none; font-size: var(--text-sm); margin-bottom: var(--space-5); transition: color var(--transition-fast); }
+.back-link:hover { color: var(--color-white); }
+.sol-detail-hero__icon { font-size: 3rem; margin-bottom: var(--space-4); }
+.sol-detail-hero__heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; color: var(--color-white); margin-bottom: var(--space-5); }
+.sol-detail-hero__desc { font-size: var(--text-lg); color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: var(--space-5); }
+.sol-detail-hero__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+.badge--white-ghost { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 100px; font-size: var(--text-xs); font-weight: 600; }
+.sol-detail-hero__ctas { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.sol-detail-hero__stats { display: flex; flex-direction: column; gap: var(--space-4); }
+.outcome-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); padding: var(--space-6); }
+.outcome-card__value { display: block; font-family: var(--font-heading); font-weight: 800; font-size: var(--text-3xl); color: var(--color-orange); line-height: 1; margin-bottom: var(--space-1); }
+.outcome-card__label { font-size: var(--text-sm); color: rgba(255,255,255,0.75); }
+.caps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-top: var(--space-10); }
+.cap-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); border-top: 3px solid var(--color-orange); }
+.cap-card__title { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-3); }
+.cap-card__desc { font-size: var(--text-sm); color: var(--color-grey); line-height: 1.7; }
+.sol-sap-section { background: var(--color-surface); }
+.sol-sap-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: center; }
+.sol-sap-text p { color: var(--color-grey); line-height: 1.7; margin-top: var(--space-4); }
+.sol-sap-badges { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.sap-badge { display: flex; align-items: center; gap: var(--space-2); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: 600; color: var(--color-blue); }
+.sap-badge svg { color: var(--color-orange); }
+.sol-accel-section { background: var(--color-blue); }
+.sol-accel-section .section-label { color: var(--color-orange); }
+.sol-accel-section .section-heading { color: var(--color-white); }
+.sol-accel-section .section-sub { color: rgba(255,255,255,0.75); }
+.accel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-top: var(--space-10); }
+.accel-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: var(--space-6); }
+.accel-card__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-orange); margin-bottom: var(--space-4); }
+.accel-card__name { font-size: var(--text-base); font-weight: 700; color: var(--color-white); margin-bottom: var(--space-3); }
+.accel-card__desc { font-size: var(--text-sm); color: rgba(255,255,255,0.7); line-height: 1.7; }
+.sol-others { background: var(--color-surface); }
+.others-grid { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-8); }
+.other-card { display: flex; align-items: center; gap: var(--space-4); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); text-decoration: none; transition: box-shadow var(--transition-fast), border-color var(--transition-fast); }
+.other-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-orange); }
+.other-card__icon { font-size: 1.8rem; flex-shrink: 0; }
+.other-card > div { flex: 1; }
+.other-card__title { font-size: var(--text-base); font-weight: 700; color: var(--color-blue); margin-bottom: var(--space-1); }
+.other-card__tagline { font-size: var(--text-sm); color: var(--color-grey); }
+.other-card > svg { color: var(--color-grey); flex-shrink: 0; transition: color var(--transition-fast); }
+.other-card:hover > svg { color: var(--color-orange); }
+@media (max-width: 1000px) {
+  .sol-detail-hero__inner { grid-template-columns: 1fr; }
+  .sol-detail-hero__stats { flex-direction: row; flex-wrap: wrap; }
+  .outcome-card { flex: 1; min-width: 160px; }
+  .caps-grid { grid-template-columns: repeat(2, 1fr); }
+  .sol-sap-inner { grid-template-columns: 1fr; }
+  .accel-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) { .caps-grid { grid-template-columns: 1fr; } }
+</style>
