@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://noshtek.com',
+  site: 'https://xdrkzx1.github.io',
+  base: '/noshtek-website',
   compressHTML: true,
 });
